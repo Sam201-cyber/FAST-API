@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YOLOv5 Video Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 20px 0;
+            white-space: pre-line;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+        form {
+            margin: 20px 0;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload a video for detection</h2>
+    <form action="/detect-video/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="video/*" required>
+        <button type="submit">Upload and Detect</button>
+    </form>
+
+    {% if error %}
+    <div class="error-message">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% if video_url %}
+    <h3>Detection Result:</h3>
+    <video width="640" controls>
+        <source src="{{ video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+</body>
+</html>
+
